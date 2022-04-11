@@ -18,7 +18,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private EditText edtAddress;
-    private Button btnSave;
+    private Button btnSave, btnCancel;
 
     private AddressAdapter adapter;
     private List<Address> listAddress;
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // find id
         edtAddress = findViewById(R.id.edtAddress);
         btnSave = findViewById(R.id.btnSave);
+        btnCancel = findViewById(R.id.btnCancel);
         listView = findViewById(R.id.idListview);
 
         // init obj
@@ -53,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(MainActivity.this, "Lưu thành công.", Toast.LENGTH_SHORT).show();
                 edtAddress.setText("");
+            }
+        });
+
+        // cancel
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtAddress.setText("");
+                edtAddress.requestFocus();
             }
         });
 

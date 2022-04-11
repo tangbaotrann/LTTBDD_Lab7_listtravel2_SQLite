@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -15,8 +16,6 @@ public class MainActivity2 extends AppCompatActivity {
 
     private EditText edtNewAddress;
     private Button btnNewAddress;
-
-    //private List<Address> listAddress;
 
     private AddressDatabaseHandler db;
 
@@ -32,7 +31,9 @@ public class MainActivity2 extends AppCompatActivity {
         // init obj
         db = new AddressDatabaseHandler(this);
 
+        // Nhận
         Bundle bundle = getIntent().getExtras();
+        int id = bundle.getInt("id");
         String addressName = bundle.getString("addressName");
 
         // set edt
@@ -42,11 +43,12 @@ public class MainActivity2 extends AppCompatActivity {
         btnNewAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Address address = new Address(edtNewAddress.toString());
-                //String addressNewName = edtNewAddress.getText().toString().trim();
-                //db.updateAddress(address);
+                Address address = db.getAddress(id);
+                address.set_address(edtNewAddress.getText().toString());
 
-                Toast.makeText(MainActivity2.this, "Update successfully.", Toast.LENGTH_SHORT).show();
+                db.updateAddress(address);
+
+                Toast.makeText(MainActivity2.this, "Cập nhật thành công.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity2.this, MainActivity.class);
 
                 startActivity(intent);
@@ -54,4 +56,5 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
     }
+
 }

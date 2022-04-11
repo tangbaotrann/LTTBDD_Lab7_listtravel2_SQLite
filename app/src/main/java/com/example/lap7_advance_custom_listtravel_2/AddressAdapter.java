@@ -76,12 +76,14 @@ public class AddressAdapter extends BaseAdapter {
             tvAddress.setText(address.get_address());
         }
 
+        // Handle imgBtn Edit
         imgBtnEdit = view.findViewById(R.id.imgBtnEdit);
         imgBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, MainActivity2.class);
                 Bundle bundle = new Bundle();
+                bundle.putInt("id", address.get_id());
                 bundle.putString("addressName", address.get_address());
                 intent.putExtras(bundle);
 

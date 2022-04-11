@@ -77,7 +77,7 @@ public class AddressDatabaseHandler extends SQLiteOpenHelper {
 
     // find by id
     Address getAddress(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_ADDRESS, new String[] {
                 KEY_ID, KEY_ADDRESS
@@ -88,7 +88,7 @@ public class AddressDatabaseHandler extends SQLiteOpenHelper {
         }
 
         Address address = new Address(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
-        return  address;
+        return address;
     }
 
     // delete
